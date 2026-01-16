@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Singapore VA — Dev Dashboard</title>
+<style>
+body {
+        font-family: Arial, sans-serif;
+            background:#0f172a;
+                color:white;
+                    margin:0;
+                        padding:20px;
+}
+
+.container {
+        max-width: 1000px;
+            margin:auto;
+}
+
+header {
+        display:flex;
+            justify-content:space-between;
+                align-items:center;
+                    margin-bottom:20px;
+}
+
+button {
+        background:#2563eb;
+            color:white;
+                border:none;
+                    padding:8px 12px;
+                        border-radius:6px;
+                            cursor:pointer;
+}
+
+button:hover { background:#1d4ed8; }
+
+.grid {
+        display:grid;
+            grid-template-columns: 1fr 1fr;
+                gap:15px;
+}
+
+.card {
+        background:#111827;
+            padding:15px;
+                border-radius:10px;
+}
+
+table {
+        width:100%;
+            border-collapse: collapse;
+}
+
+th, td {
+        padding:8px;
+            border-bottom:1px solid #1f2937;
+                text-align:left;
+}
+
+select, input {
+        width:100%;
+            padding:6px;
+                margin-top:5px;
+                    border-radius:6px;
+                        border:none;
+}
+
+ul {
+        list-style:none;
+            padding:0;
+}
+
+li {
+        background:#0b1220;
+            margin:5px 0;
+                padding:8px;
+                    border-radius:6px;
+                        display:flex;
+                            justify-content:space-between;
+                                align-items:center;
+}
+
+.small {
+        font-size:12px;
+            color:#9ca3af;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+<h1>✈️ Singapore VA — Dev Dashboard</h1>
+<button onclick="saveData()">💾 Sauvegarder</button>
+</header>
+
+<div class="grid">
+
+<!-- FLOTTE -->
+<div class="card">
+<h2>Flotte</h2>
+
+<table>
+<thead>
+<tr>
+<th>Avion</th>
+<th>Status</th>
+<th>Base</th>
+</tr>
+</thead>
+<tbody id="fleetTable">
+</tbody>
+</table>
+
+<h3>Ajouter / Modifier un avion</h3>
+<input id="planeName" placeholder="Ex: A350-900">
+<select id="planeStatus">
+<option>🟢 Ready</option>
+<option>🟡 WIP</option>
+<option>🔴 Bug</option>
+</select>
+<input id="planeBase" placeholder="Base (ex: SIN)">
+<button onclick="addPlane()">Ajouter à la flotte</button>
+</div>
+
+<!-- VOLS -->
+<div class="card">
+<h2>Prochains vols</h2>
+
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Avion</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="flightsTable">
+</tbody>
+</table>
+
+<h3>Ajouter un vol</h3>
+<input id="flightRoute" placeholder="Ex: SIN–CDG">
+<input id="flightPlane" placeholder="Avion (ex: 777)">
+<select id="flightStatus">
+<option>Prévu</option>
+<option>Test</option>
+<option>WIP</option>
+</select>
+<button onclick="addFlight()">Ajouter le vol</button>
+</div>
+
+</div>
+
+<!-- CHECKLIST -->
+<div class="card" style="margin-top:15px;">
+<h2>Checklist avant ouverture</h2>
+
+<ul id="checklist">
+</ul>
+
+<input id="checkItem" placeholder="Nouvelle tâche...">
+<button onclick="addCheck()">Ajouter à la checklist</button>
+</div>
+
+</div>
+
+<script>
+// DONNÉES PAR DÉFAUT (tu peux changer plus tard)
+let data = {
+    fleet: [
+        {name:"A350-900", status:"🟡 WIP", base:"SIN"},
+        {name:"787-9", status:"🟡 WIP", base:"SIN"},
+        {name:"777-ER", status:"🟢 Ready", base:"SIN"},
+        {name:"737 MAX 8", status:"🟢 Ready", base:"SIN"}
+    ],
+    flights: [
+        {route:"SIN–CDG", plane:"777", status:"Test"},
+        {route:"SIN–FCO", plane:"A350", status:"Prévu"},
+        {route:"SIN–IST", plane:"787", status:"WIP"}
+    ],
+    checklist: [
+        "Aéroport SIN placé",
+        "Baggage system fonctionnel",
+        "Uniform system OK",
+        "Gates fonctionnelles",
+        "CDG importé"
+    ]
+};
+
+// CHARGER SAUVEGARDE SI EXISTE
+if(localStorage.getItem("siaDashboard")) {
+    data = JSON.parse(localStorage.getItem("siaDashboard"));
+}
+
+function saveData() {
+    localStorage.setItem("siaDashboard", JSON.stringify(data));
+    alert("Dashboard sauvegardé !");
+}
+
+// AFFICHAGE FLOTTE
+function renderFleet() {
+    let table = document.getElementById("fleetTable");
+    table.innerHTML = "";
+
+    data.fleet.forEach((p, i) => {
+        let row = document.createElement("tr");
+
+        row.innerHTML = `
+        <td>${p.name}</td>
+        <td>${p.status}</td>
+        <td>${p.base}</td>
+        <td><button onclick="deletePlane(${i})">🗑️</button></td>
+        `;
+
+        table.appendChild(row);
+    });
+}
+
+function addPlane() {
+    let name = document.getElementById("planeName").value;
+    let status = document.getElementById("planeStatus").value;
+    let base = document.getElementById("planeBase").value;
+
+    if(name.trim() === "") return alert("Mets un nom d'avion");
+
+    data.fleet.push({name, status, base});
+    renderFleet();
+}
+
+function deletePlane(i) {
+    data.fleet.splice(i, 1);
+    renderFleet();
+}
+
+// AFFICHAGE VOLS
+function renderFlights() {
+    let table = document.getElementById("flightsTable");
+    table.innerHTML = "";
+
+    data.flights.forEach((f, i) => {
+        let row = document.createElement("tr");
+
+        row.innerHTML = `
+        <td>${f.route}</td>
+        <td>${f.plane}</td>
+        <td>${f.status}</td>
+        <td><button onclick="deleteFlight(${i})">🗑️</button></td>
+        `;
+
+        table.appendChild(row);
+    });
+}
+
+function addFlight() {
+    let route = document.getElementById("flightRoute").value;
+    let plane = document.getElementById("flightPlane").value;
+    let status = document.getElementById("flightStatus").value;
+
+    if(route.trim() === "") return alert("Mets une route");
+
+    data.flights.push({route, plane, status});
+    renderFlights();
+}
+
+function deleteFlight(i) {
+    data.flights.splice(i, 1);
+    renderFlights();
+}
+
+// CHECKLIST
+function renderChecklist() {
+    let list = document.getElementById("checklist");
+    list.innerHTML = "";
+
+    data.checklist.forEach((item, i) => {
+        let li = document.createElement("li");
+
+        li.innerHTML = `
+        <span>${item}</span>
+        <button onclick="deleteCheck(${i})">❌</button>
+        `;
+
+        list.appendChild(li);
+    });
+}
+
+function addCheck() {
+    let txt = document.getElementById("checkItem").value;
+    if(txt.trim() === "") return;
+
+    data.checklist.push(txt);
+    document.getElementById("checkItem").value = "";
+    renderChecklist();
+}
+
+function deleteCheck(i) {
+    data.checklist.splice(i, 1);
+    renderChecklist();
+}
+
+// PREMIER RENDER
+renderFleet();
+renderFlights();
+renderChecklist();
+</script>
+
+</body>
+</html>
+}
+}
+    })
+}
+}
+}
+    })
+}
+}
+}
+    })
+}
+}
+}
+    ]
+    ]
+    ]
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
