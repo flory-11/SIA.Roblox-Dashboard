@@ -2,215 +2,312 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Singapore VA Dashboard — Premium</title>
+<title>Singapore VA • Operations Hub</title>
 <style>
-body {
-  margin:0;
-    font-family: 'Segoe UI', sans-serif;
-      background: #0a1f3d;
-        color:white;
-        }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-        .container {
-          max-width: 1200px;
-            margin:auto;
-              padding: 20px;
-              }
+:root {
+  --bg: #0B1220;
+    --card: #0F172A;
+      --panel: #111827;
+        --primary: #1E3A8A;
+          --gold: #EAB308;
+            --text: #E5E7EB;
+              --muted: #9CA3AF;
+                --green: #22C55E;
+                  --orange: #F97316;
+                    --red: #EF4444;
+                    }
 
-              header {
-                display:flex;
-                  justify-content:space-between;
-                    align-items:center;
-                      margin-bottom:30px;
-                      }
+                    * {
+                      box-sizing: border-box;
+                        font-family: 'Inter', sans-serif;
+                        }
 
-                      header h1 {
-                        color:#FFD700;
-                          font-size:2em;
-                          }
+                        body {
+                          margin: 0;
+                            background: var(--bg);
+                              color: var(--text);
+                              }
 
-                          button {
-                            background:#FFD700;
-                              border:none;
-                                color:#0a1f3d;
-                                  padding:10px 15px;
-                                    border-radius:8px;
-                                      cursor:pointer;
-                                        font-weight:bold;
-                                          transition:0.2s;
+                              header {
+                                background: linear-gradient(90deg, #0B1220, #0F172A);
+                                  padding: 20px 40px;
+                                    display: flex;
+                                      justify-content: space-between;
+                                        align-items: center;
+                                          border-bottom: 1px solid #1E293B;
                                           }
 
-                                          button:hover {
-                                            background:#FFC700;
-                                            }
+                                          h1 {
+                                            color: var(--gold);
+                                              font-size: 22px;
+                                                margin: 0;
+                                                }
 
-                                            .section-title {
-                                              font-size:1.5em;
-                                                margin-bottom:15px;
-                                                  color:#FFD700;
-                                                    border-bottom: 2px solid #FFD700;
-                                                      padding-bottom:5px;
+                                                .container {
+                                                  max-width: 1200px;
+                                                    margin: auto;
+                                                      padding: 25px;
                                                       }
 
-                                                      .grid {
-                                                        display:grid;
-                                                          grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-                                                            gap:20px;
-                                                            }
+                                                      .section {
+                                                        margin-bottom: 30px;
+                                                        }
 
-                                                            .card {
-                                                              background:#112c4a;
-                                                                border-radius:12px;
-                                                                  padding:15px;
-                                                                    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-                                                                      transition: transform 0.2s, box-shadow 0.2s;
+                                                        .section-title {
+                                                          font-size: 18px;
+                                                            font-weight: 700;
+                                                              margin-bottom: 10px;
+                                                                color: var(--gold);
+                                                                }
+
+                                                                .grid {
+                                                                  display: grid;
+                                                                    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                                                                      gap: 15px;
                                                                       }
 
-                                                                      .card:hover {
-                                                                        transform: translateY(-5px);
-                                                                          box-shadow: 0 8px 25px rgba(0,0,0,0.5);
-                                                                          }
-
-                                                                          .card h3 {
-                                                                            margin-top:0;
-                                                                              color:#FFD700;
-                                                                              }
-
-                                                                              .status {
-                                                                                font-weight:bold;
+                                                                      /* CARDS */
+                                                                      .card {
+                                                                        background: var(--card);
+                                                                          padding: 15px;
+                                                                            border-radius: 12px;
+                                                                              border: 1px solid #1E293B;
+                                                                                transition: transform .1s ease, box-shadow .1s ease;
                                                                                 }
 
-                                                                                ul {
-                                                                                  list-style:none;
-                                                                                    padding:0;
+                                                                                .card:hover {
+                                                                                  transform: translateY(-3px);
+                                                                                    box-shadow: 0 8px 20px rgba(0,0,0,.4);
                                                                                     }
 
-                                                                                    ul li {
-                                                                                      background:#0d2340;
-                                                                                        margin:5px 0;
-                                                                                          padding:8px 12px;
-                                                                                            border-radius:8px;
-                                                                                              display:flex;
-                                                                                                justify-content:space-between;
-                                                                                                  align-items:center;
+                                                                                    .card h3 {
+                                                                                      margin: 0 0 8px 0;
+                                                                                        font-size: 16px;
+                                                                                        }
+
+                                                                                        /* STATUS BADGES */
+                                                                                        .badge {
+                                                                                          display: inline-block;
+                                                                                            padding: 4px 8px;
+                                                                                              border-radius: 8px;
+                                                                                                font-size: 12px;
+                                                                                                  font-weight: 600;
                                                                                                   }
-                                                                                                  </style>
-                                                                                                  </head>
 
-                                                                                                  <body>
-                                                                                                  <div class="container">
+                                                                                                  .ready { background: rgba(34,197,94,.15); color: var(--green); }
+                                                                                                  .wip { background: rgba(249,115,22,.15); color: var(--orange); }
+                                                                                                  .test { background: rgba(234,179,8,.15); color: var(--gold); }
 
-                                                                                                  <header>
-                                                                                                    <h1>✈️ Singapore VA Dashboard</h1>
-                                                                                                      <button onclick="saveData()">💾 Sauvegarder</button>
-                                                                                                      </header>
+                                                                                                  /* INPUT PANEL */
+                                                                                                  .panel {
+                                                                                                    background: var(--panel);
+                                                                                                      padding: 12px;
+                                                                                                        border-radius: 10px;
+                                                                                                          border: 1px solid #1E293B;
+                                                                                                            display: grid;
+                                                                                                              grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                                                                                                                gap: 8px;
+                                                                                                                  margin-bottom: 12px;
+                                                                                                                  }
 
-                                                                                                      <div class="section-title">Flotte</div>
-                                                                                                      <div class="grid" id="fleetGrid"></div>
+                                                                                                                  input, select {
+                                                                                                                    background: #020617;
+                                                                                                                      border: 1px solid #1E293B;
+                                                                                                                        color: var(--text);
+                                                                                                                          padding: 8px;
+                                                                                                                            border-radius: 8px;
+                                                                                                                            }
 
-                                                                                                      <div class="section-title">Prochains Vols</div>
-                                                                                                      <div class="grid" id="flightsGrid"></div>
+                                                                                                                            button {
+                                                                                                                              background: var(--primary);
+                                                                                                                                color: white;
+                                                                                                                                  border: none;
+                                                                                                                                    padding: 8px 12px;
+                                                                                                                                      border-radius: 8px;
+                                                                                                                                        cursor: pointer;
+                                                                                                                                          font-weight: 600;
+                                                                                                                                          }
 
-                                                                                                      <div class="section-title">Checklist</div>
-                                                                                                      <ul id="checklist"></ul>
-                                                                                                      <input id="checkItem" placeholder="Nouvelle tâche..." style="width:80%;padding:8px;border-radius:5px;border:none;margin-top:5px;">
-                                                                                                      <button onclick="addCheck()">Ajouter</button>
+                                                                                                                                          button:hover { opacity: .9; }
 
-                                                                                                      </div>
+                                                                                                                                          .small {
+                                                                                                                                            background: #020617;
+                                                                                                                                              font-size: 12px;
+                                                                                                                                                padding: 6px 10px;
+                                                                                                                                                }
+                                                                                                                                                </style>
+                                                                                                                                                </head>
 
-                                                                                                      <script>
-                                                                                                      // DONNÉES DE DÉMO
-                                                                                                      let data = {
-                                                                                                      fleet: [
-                                                                                                      {name:"A350-900", status:"🟡 WIP", base:"SIN"},
-                                                                                                      {name:"777-ER", status:"🟢 Ready", base:"CDG"},
-                                                                                                      {name:"737 MAX 8", status:"🟢 Ready", base:"SIN"}
-                                                                                                      ],
-                                                                                                      flights: [
-                                                                                                      {route:"SIN–FCO", plane:"A350-900", status:"Prévu"},
-                                                                                                      {route:"CDG–SIN", plane:"777-ER", status:"Test"}
-                                                                                                      ],
-                                                                                                      checklist:[
-                                                                                                      "Vérifier Baggage System",
-                                                                                                      "Uniform system OK",
-                                                                                                      "Gates fonctionnelles"
-                                                                                                      ]
-                                                                                                      };
+                                                                                                                                                <body>
 
-                                                                                                      // Sauvegarde / load
-                                                                                                      if(localStorage.getItem("siaDashboard")) {
-                                                                                                        data = JSON.parse(localStorage.getItem("siaDashboard"));
-                                                                                                        }
-                                                                                                        function saveData() {
-                                                                                                          localStorage.setItem("siaDashboard", JSON.stringify(data));
-                                                                                                            alert("Dashboard sauvegardé !");
-                                                                                                            }
+                                                                                                                                                <header>
+                                                                                                                                                  <h1>✈️ Singapore VA • Operations Hub</h1>
+                                                                                                                                                    <button onclick="save()">💾 Sauvegarder</button>
+                                                                                                                                                    </header>
 
-                                                                                                            // RENDER FLOTTE
-                                                                                                            function renderFleet() {
-                                                                                                              let grid = document.getElementById("fleetGrid");
-                                                                                                                grid.innerHTML="";
-                                                                                                                  data.fleet.forEach((f,i)=>{
-                                                                                                                      let card = document.createElement("div");
-                                                                                                                          card.className="card";
-                                                                                                                              card.innerHTML=`
-                                                                                                                                    <h3>${f.name}</h3>
-                                                                                                                                          <p>Base: ${f.base}</p>
-                                                                                                                                                <p>Status: <span class="status">${f.status}</span></p>
-                                                                                                                                                      <button onclick="deletePlane(${i})">Supprimer</button>
-                                                                                                                                                          `;
-                                                                                                                                                              grid.appendChild(card);
-                                                                                                                                                                });
-                                                                                                                                                                }
+                                                                                                                                                    <div class="container">
 
-                                                                                                                                                                // RENDER VOLS
-                                                                                                                                                                function renderFlights() {
-                                                                                                                                                                  let grid = document.getElementById("flightsGrid");
-                                                                                                                                                                    grid.innerHTML="";
-                                                                                                                                                                      data.flights.forEach((f,i)=>{
-                                                                                                                                                                          let card = document.createElement("div");
-                                                                                                                                                                              card.className="card";
-                                                                                                                                                                                  card.innerHTML=`
-                                                                                                                                                                                        <h3>${f.route}</h3>
-                                                                                                                                                                                              <p>Avion: ${f.plane}</p>
-                                                                                                                                                                                                    <p>Status: <span class="status">${f.status}</span></p>
-                                                                                                                                                                                                          <button onclick="deleteFlight(${i})">Supprimer</button>
-                                                                                                                                                                                                              `;
-                                                                                                                                                                                                                  grid.appendChild(card);
-                                                                                                                                                                                                                    });
-                                                                                                                                                                                                                    }
+                                                                                                                                                    <!-- FLOTTE -->
+                                                                                                                                                    <div class="section">
+                                                                                                                                                      <div class="section-title">Flotte</div>
 
-                                                                                                                                                                                                                    // CHECKLIST
-                                                                                                                                                                                                                    function renderChecklist() {
-                                                                                                                                                                                                                      let list = document.getElementById("checklist");
-                                                                                                                                                                                                                        list.innerHTML="";
-                                                                                                                                                                                                                          data.checklist.forEach((c,i)=>{
-                                                                                                                                                                                                                              let li = document.createElement("li");
-                                                                                                                                                                                                                                  li.innerHTML=`
-                                                                                                                                                                                                                                        <span>${c}</span>
-                                                                                                                                                                                                                                              <button onclick="deleteCheck(${i})">❌</button>
-                                                                                                                                                                                                                                                  `;
-                                                                                                                                                                                                                                                      list.appendChild(li);
-                                                                                                                                                                                                                                                        });
-                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                        function addCheck(){
-                                                                                                                                                                                                                                                          let txt = document.getElementById("checkItem").value;
-                                                                                                                                                                                                                                                            if(txt.trim()==="") return;
-                                                                                                                                                                                                                                                              data.checklist.push(txt);
-                                                                                                                                                                                                                                                                document.getElementById("checkItem").value="";
-                                                                                                                                                                                                                                                                  renderChecklist();
-                                                                                                                                                                                                                                                                  }
+                                                                                                                                                        <div class="panel">
+                                                                                                                                                            <input id="planeName" placeholder="Ex: A350-900">
+                                                                                                                                                                <input id="planeBase" placeholder="Base (SIN / CDG)">
+                                                                                                                                                                    <select id="planeStatus">
+                                                                                                                                                                          <option value="ready">Ready</option>
+                                                                                                                                                                                <option value="wip">WIP</option>
+                                                                                                                                                                                      <option value="test">Test</option>
+                                                                                                                                                                                          </select>
+                                                                                                                                                                                              <button onclick="addPlane()">+ Ajouter avion</button>
+                                                                                                                                                                                                </div>
 
-                                                                                                                                                                                                                                                                  function deletePlane(i){ data.fleet.splice(i,1); renderFleet();}
-                                                                                                                                                                                                                                                                  function deleteFlight(i){ data.flights.splice(i,1); renderFlights();}
-                                                                                                                                                                                                                                                                  function deleteCheck(i){ data.checklist.splice(i,1); renderChecklist();}
+                                                                                                                                                                                                  <div class="grid" id="fleet"></div>
+                                                                                                                                                                                                  </div>
 
-                                                                                                                                                                                                                                                                  // INIT
-                                                                                                                                                                                                                                                                  renderFleet();
-                                                                                                                                                                                                                                                                  renderFlights();
-                                                                                                                                                                                                                                                                  renderChecklist();
+                                                                                                                                                                                                  <!-- VOLS -->
+                                                                                                                                                                                                  <div class="section">
+                                                                                                                                                                                                    <div class="section-title">Vols programmés</div>
 
-                                                                                                                                                                                                                                                                  </script>
+                                                                                                                                                                                                      <div class="panel">
+                                                                                                                                                                                                          <input id="route" placeholder="Ex: SIN–FCO">
+                                                                                                                                                                                                              <input id="assigned" placeholder="Avion (A350 / 777)">
+                                                                                                                                                                                                                  <select id="flightStatus">
+                                                                                                                                                                                                                        <option value="test">Test</option>
+                                                                                                                                                                                                                              <option value="wip">WIP</option>
+                                                                                                                                                                                                                                    <option value="ready">Ready</option>
+                                                                                                                                                                                                                                        </select>
+                                                                                                                                                                                                                                            <button onclick="addFlight()">+ Ajouter vol</button>
+                                                                                                                                                                                                                                              </div>
 
-                                                                                                                                                                                                                                                                  </body>
-                                                                                                                                                                                                                                                                  </html>
+                                                                                                                                                                                                                                                <div class="grid" id="flights"></div>
+                                                                                                                                                                                                                                                </div>
+
+                                                                                                                                                                                                                                                <!-- CHECKLIST -->
+                                                                                                                                                                                                                                                <div class="section">
+                                                                                                                                                                                                                                                  <div class="section-title">Checklist Ops</div>
+
+                                                                                                                                                                                                                                                    <div class="panel">
+                                                                                                                                                                                                                                                        <input id="task" placeholder="Nouvelle tâche...">
+                                                                                                                                                                                                                                                            <button onclick="addTask()">+ Ajouter</button>
+                                                                                                                                                                                                                                                              </div>
+
+                                                                                                                                                                                                                                                                <div class="grid" id="checklist"></div>
+                                                                                                                                                                                                                                                                </div>
+
+                                                                                                                                                                                                                                                                </div>
+
+                                                                                                                                                                                                                                                                <script>
+                                                                                                                                                                                                                                                                let data = {
+                                                                                                                                                                                                                                                                  fleet: [
+                                                                                                                                                                                                                                                                      { name: "A350-900", base: "SIN", status: "wip" },
+                                                                                                                                                                                                                                                                          { name: "777-ER", base: "CDG", status: "ready" }
+                                                                                                                                                                                                                                                                            ],
+                                                                                                                                                                                                                                                                              flights: [
+                                                                                                                                                                                                                                                                                  { route: "SIN–FCO", plane: "A350-900", status: "test" },
+                                                                                                                                                                                                                                                                                      { route: "CDG–SIN", plane: "777-ER", status: "test" }
+                                                                                                                                                                                                                                                                                        ],
+                                                                                                                                                                                                                                                                                          tasks: [
+                                                                                                                                                                                                                                                                                              "Baggage System SIN",
+                                                                                                                                                                                                                                                                                                  "Gates CDG",
+                                                                                                                                                                                                                                                                                                      "Uniform System"
+                                                                                                                                                                                                                                                                                                        ]
+                                                                                                                                                                                                                                                                                                        };
+
+                                                                                                                                                                                                                                                                                                        // LOAD
+                                                                                                                                                                                                                                                                                                        if (localStorage.getItem("siaOps")) {
+                                                                                                                                                                                                                                                                                                          data = JSON.parse(localStorage.getItem("siaOps"));
+                                                                                                                                                                                                                                                                                                          }
+
+                                                                                                                                                                                                                                                                                                          function save() {
+                                                                                                                                                                                                                                                                                                            localStorage.setItem("siaOps", JSON.stringify(data));
+                                                                                                                                                                                                                                                                                                              alert("Sauvegardé !");
+                                                                                                                                                                                                                                                                                                              }
+
+                                                                                                                                                                                                                                                                                                              /* ----- FLOTTE ----- */
+                                                                                                                                                                                                                                                                                                              function renderFleet() {
+                                                                                                                                                                                                                                                                                                                const box = document.getElementById("fleet");
+                                                                                                                                                                                                                                                                                                                  box.innerHTML = "";
+                                                                                                                                                                                                                                                                                                                    data.fleet.forEach((p,i)=>{
+                                                                                                                                                                                                                                                                                                                        box.innerHTML += `
+                                                                                                                                                                                                                                                                                                                            <div class="card">
+                                                                                                                                                                                                                                                                                                                                  <h3>${p.name}</h3>
+                                                                                                                                                                                                                                                                                                                                        <div style="color:var(--muted); font-size:12px;">Base: ${p.base}</div>
+                                                                                                                                                                                                                                                                                                                                              <div class="badge ${p.status}">${p.status.toUpperCase()}</div>
+                                                                                                                                                                                                                                                                                                                                                    <button class="small" onclick="removePlane(${i})">Supprimer</button>
+                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                            `;
+                                                                                                                                                                                                                                                                                                                                                              });
+                                                                                                                                                                                                                                                                                                                                                              }
+
+                                                                                                                                                                                                                                                                                                                                                              function addPlane() {
+                                                                                                                                                                                                                                                                                                                                                                data.fleet.push({
+                                                                                                                                                                                                                                                                                                                                                                    name: planeName.value,
+                                                                                                                                                                                                                                                                                                                                                                        base: planeBase.value,
+                                                                                                                                                                                                                                                                                                                                                                            status: planeStatus.value
+                                                                                                                                                                                                                                                                                                                                                                              });
+                                                                                                                                                                                                                                                                                                                                                                                planeName.value = ""; planeBase.value = "";
+                                                                                                                                                                                                                                                                                                                                                                                  renderFleet();
+                                                                                                                                                                                                                                                                                                                                                                                  }
+
+                                                                                                                                                                                                                                                                                                                                                                                  /* ----- VOLS ----- */
+                                                                                                                                                                                                                                                                                                                                                                                  function renderFlights() {
+                                                                                                                                                                                                                                                                                                                                                                                    const box = document.getElementById("flights");
+                                                                                                                                                                                                                                                                                                                                                                                      box.innerHTML = "";
+                                                                                                                                                                                                                                                                                                                                                                                        data.flights.forEach((f,i)=>{
+                                                                                                                                                                                                                                                                                                                                                                                            box.innerHTML += `
+                                                                                                                                                                                                                                                                                                                                                                                                <div class="card">
+                                                                                                                                                                                                                                                                                                                                                                                                      <h3>${f.route}</h3>
+                                                                                                                                                                                                                                                                                                                                                                                                            <div style="color:var(--muted); font-size:12px;">Avion: ${f.plane}</div>
+                                                                                                                                                                                                                                                                                                                                                                                                                  <div class="badge ${f.status}">${f.status.toUpperCase()}</div>
+                                                                                                                                                                                                                                                                                                                                                                                                                        <button class="small" onclick="removeFlight(${i})">Supprimer</button>
+                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                `;
+                                                                                                                                                                                                                                                                                                                                                                                                                                  });
+                                                                                                                                                                                                                                                                                                                                                                                                                                  }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                  function addFlight() {
+                                                                                                                                                                                                                                                                                                                                                                                                                                    data.flights.push({
+                                                                                                                                                                                                                                                                                                                                                                                                                                        route: route.value,
+                                                                                                                                                                                                                                                                                                                                                                                                                                            plane: assigned.value,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                status: flightStatus.value
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  });
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    route.value=""; assigned.value="";
+                                                                                                                                                                                                                                                                                                                                                                                                                                                      renderFlights();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                      }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                      /* ----- CHECKLIST ----- */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                      function renderTasks() {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        const box = document.getElementById("checklist");
+                                                                                                                                                                                                                                                                                                                                                                                                                                                          box.innerHTML = "";
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            data.tasks.forEach((t,i)=>{
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                box.innerHTML += `
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="card">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <span>${t}</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <button class="small" onclick="removeTask(${i})">❌</button>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        `;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          });
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          function addTask() {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            data.tasks.push(task.value);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              task.value="";
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                renderTasks();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /* REMOVE */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                function removePlane(i){ data.fleet.splice(i,1); renderFleet(); }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                function removeFlight(i){ data.flights.splice(i,1); renderFlights(); }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                function removeTask(i){ data.tasks.splice(i,1); renderTasks(); }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /* INIT */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                renderFleet();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                renderFlights();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                renderTasks();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </script>
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </body>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </html>
